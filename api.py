@@ -51,6 +51,7 @@ async def root():
             <h1>smartCH4 Biogas Waste Optimization API</h1>
             <p>Optimize the cost of waste for biogas production using linear programming</p>
             <p>Go to <a href="docs">/docs</a> to see the API documentation.</p>
+            <p><a href="https://github.com/tbousiou/smartCH4-linear-optimization-api">GitHub repository</a></p>
         </body>
     </html>
     """
