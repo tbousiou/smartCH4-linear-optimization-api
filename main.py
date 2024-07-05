@@ -6,7 +6,10 @@ from solver import solve_lp
 import pandas as pd
 
 # app = FastAPI(openapi_url='/openapi.json')
-app = FastAPI()
+app = FastAPI(
+    title="smartCH4 Biogas Waste Optimization API",
+    description="Optimize the cost of waste for biogas production using linear programming",
+)
 
 class Substrate(BaseModel):
     name: str
