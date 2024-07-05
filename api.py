@@ -1,6 +1,6 @@
 from typing import List, Annotated
-
 from fastapi import Body, Query, FastAPI
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from solver import solve_lp
 import pandas as pd
@@ -40,9 +40,20 @@ EXAMPLES = [
 ]
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    return {"message": "Ok, this is the root endpoint of the API"}
+    return """
+    <html>
+        <head>
+            <title>smartCH4 Biogas Waste Optimization API</title>
+        </head>
+        <body>
+            <h1>smartCH4 Biogas Waste Optimization API</h1>
+            <p>Optimize the cost of waste for biogas production using linear programming</p>
+            <p>Go to <a href="docs">/docs</a> to see the API documentation.</p>
+        </body>
+    </html>
+    """
 
 @app.post("/solve")
 def solve(data: Annotated[
