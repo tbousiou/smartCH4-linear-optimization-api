@@ -3,7 +3,7 @@ from ortools.linear_solver import pywraplp
 
 # Solver function
 
-def solve_lp(df, total_target=1000, deviation=0):
+def solve_lp(df, total_target=700, deviation=0):
     
     if total_target <= 0:
         raise ValueError("target must be a positive number")
@@ -25,12 +25,12 @@ def solve_lp(df, total_target=1000, deviation=0):
         objective.SetCoefficient(var, obj_coeff[var_name])
     objective.SetMinimization()
 
-    # Create a linear constraint.  n*T(1+e) <= Σ(Bi * Xi) <= n*T(1+e)
+    # Create a linear constraint.  n*T = Σ(Mi * Xi)
    
     ct1 = solver.Constraint(total_target - deviation, total_target + deviation, "ct1")
     for var_name, var in x.items():
         # print(df.loc[var_name, 'B'])
-        ct1.SetCoefficient(var, df.loc[var_name, 'Biogas'])
+        ct1.SetCoefficient(var, df.loc[var_name, 'Methane'])
 
     # Create a linear constraint Σ(xi(Fi-0.1)) <=0
     ct2 = solver.Constraint(-solver.infinity(), 0, "ct2")

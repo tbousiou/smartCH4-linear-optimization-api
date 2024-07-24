@@ -26,9 +26,9 @@ For production use `run` command. You mighy need to specify a port number with `
 # Deploy as a Linux service
 For production it's better to create a linux systemd service.
 
-Edit `exampe.service` and replace `/path_to_app` with
+Edit `example.service` and replace `/path_to_app` with
 
-Copy `exampe.service` to `/etc/systemd/system`
+Copy `example.service` to `/etc/systemd/system`
 
 Reload the service files to include the new service.
 

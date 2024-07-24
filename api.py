@@ -7,13 +7,13 @@ import pandas as pd
 
 # app = FastAPI(openapi_url='/openapi.json')
 app = FastAPI(
-    title="smartCH4 Biogas Waste Optimization API",
-    description="Optimize the cost of waste for biogas production using linear programming",
+    title="smartCH4 waste optimization API",
+    description="Optimize the cost of waste for methane production using linear programming",
 )
 
 class Substrate(BaseModel):
     name: str
-    Biogas: float
+    Methane: float
     Weight: float
     Fat: float
     Cost: float
@@ -23,19 +23,19 @@ class Substrate(BaseModel):
 EXAMPLES = [
     {
         "name": "S1",
-        "Biogas": 9,
-        "Weight": 60,
+        "Methane": 9,
+        "Weight": 45,
         "Fat": 0.11,
-        "Cost": 2,
-        "Distance": 0
+        "Cost": 2.5,
+        "Distance": 1
     },
     {
         "name": "S2",
-        "Biogas": 10,
-        "Weight": 50,
+        "Methane": 10,
+        "Weight": 35,
         "Fat": 0.08,
         "Cost": 2,
-        "Distance": 0
+        "Distance": 1
     }
 ]
 
@@ -45,11 +45,11 @@ async def root():
     return """
     <html>
         <head>
-            <title>smartCH4 Biogas Waste Optimization API</title>
+            <title>smartCH4 Waste Optimization API</title>
         </head>
         <body>
-            <h1>smartCH4 Biogas Waste Optimization API</h1>
-            <p>Optimize the cost of waste for biogas production using linear programming</p>
+            <h1>smartCH4 Waste Optimization API</h1>
+            <p>Optimize the cost of waste for methane production using linear programming</p>
             <p>Go to <a href="docs">/docs</a> to see the API documentation.</p>
             <p><a href="https://github.com/tbousiou/smartCH4-linear-optimization-api">GitHub repository</a></p>
         </body>
@@ -60,7 +60,7 @@ async def root():
 def solve(data: Annotated[
     List[Substrate],
     Body(examples=[EXAMPLES])
-], target: Annotated[int, Body(examples=[1000])],
+], target: Annotated[int, Body(examples=[700])],
 multiple_solutions: bool = Query(False, description="Whether to return multiple solutions")
 ):
 
