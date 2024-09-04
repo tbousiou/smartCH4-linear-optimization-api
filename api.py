@@ -13,7 +13,7 @@ app = FastAPI(
 
 class Substrate(BaseModel):
     name: str
-    methane: float
+    methane_potential: float
     weight: float
     lipids: float
     cost_per_kg: float
@@ -23,7 +23,7 @@ class Substrate(BaseModel):
 EXAMPLES = [
     {
         "name": "S1",
-        "methane": 9,
+        "methane_potential": 9,
         "weight": 45,
         "lipids": 0.11,
         "cost_per_kg": 2.5,
@@ -31,7 +31,7 @@ EXAMPLES = [
     },
     {
         "name": "S2",
-        "methane": 10,
+        "methane_potential": 10,
         "weight": 35,
         "lipids": 0.08,
         "cost_per_kg": 2,

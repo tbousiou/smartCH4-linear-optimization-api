@@ -30,7 +30,7 @@ def solve_lp(df, total_target=700, deviation=0):
     ct1 = solver.Constraint(total_target - deviation, total_target + deviation, "ct1")
     for var_name, var in x.items():
         # print(df.loc[var_name, 'B'])
-        ct1.SetCoefficient(var, df.loc[var_name, 'methane'])
+        ct1.SetCoefficient(var, df.loc[var_name, 'methane_potential'])
 
     # Create a linear constraint Σ(xi(Fi-0.1)) <=0
     ct2 = solver.Constraint(-solver.infinity(), 0, "ct2")
