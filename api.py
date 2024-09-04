@@ -25,7 +25,7 @@ EXAMPLES = [
         "name": "S1",
         "methane_potential": 9,
         "weight": 45,
-        "lipids": 0.11,
+        "lipids": 11,
         "cost_per_kg": 2.5,
         "distance": 1
     },
@@ -33,7 +33,7 @@ EXAMPLES = [
         "name": "S2",
         "methane_potential": 10,
         "weight": 35,
-        "lipids": 0.08,
+        "lipids": 8,
         "cost_per_kg": 2,
         "distance": 1
     }

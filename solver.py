@@ -10,7 +10,8 @@ def solve_lp(df, total_target=700, deviation=0):
     
     # Create the linear solver with the GLOP backend.
     solver = pywraplp.Solver.CreateSolver("GLOP")
-
+    # divide lipids column by 100
+    df['lipids'] = df['lipids'] / 100
     # Create the variables s1, s2, ... sn
     x = {}
     for index, row in df.iterrows():
