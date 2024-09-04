@@ -14,10 +14,10 @@ def solve_lp(df, total_target=700, deviation=0):
     # Create the variables s1, s2, ... sn
     x = {}
     for index, row in df.iterrows():
-        x[index] = solver.NumVar(0, row['Weight'], index)
+        x[index] = solver.NumVar(0, row['weight'], index)
 
     # Objective function coefficients
-    obj_coeff = df['Cost'] + df['Distance']
+    obj_coeff = df['cost_per_kg'] + df['distance']
 
     # Create the objective function.
     objective = solver.Objective()
@@ -30,12 +30,12 @@ def solve_lp(df, total_target=700, deviation=0):
     ct1 = solver.Constraint(total_target - deviation, total_target + deviation, "ct1")
     for var_name, var in x.items():
         # print(df.loc[var_name, 'B'])
-        ct1.SetCoefficient(var, df.loc[var_name, 'Methane'])
+        ct1.SetCoefficient(var, df.loc[var_name, 'methane'])
 
     # Create a linear constraint Σ(xi(Fi-0.1)) <=0
     ct2 = solver.Constraint(-solver.infinity(), 0, "ct2")
     for var_name, var in x.items():
-        ct2.SetCoefficient(var, df.loc[var_name, 'Fat'] - 0.1)
+        ct2.SetCoefficient(var, df.loc[var_name, 'lipids'] - 0.1)
 
     status = solver.Solve()
     
