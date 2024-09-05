@@ -13,29 +13,37 @@ app = FastAPI(
 
 class Substrate(BaseModel):
     name: str
-    methane_potential: float
     weight: float
-    lipids: float
     cost_per_kg: float
     distance: int
+    carbs: float
+    proteins: float
+    lipids: float
+    methane_potential: float
 
 
 EXAMPLES = [
     {
         "name": "S1",
-        "methane_potential": 9,
         "weight": 45,
-        "lipids": 11,
         "cost_per_kg": 2.5,
-        "distance": 1
+        "distance": 1,
+        "carbs": 20,
+        "proteins": 14,
+        "lipids": 11,
+        "methane_potential": 9,
+        
     },
     {
         "name": "S2",
-        "methane_potential": 10,
         "weight": 35,
-        "lipids": 8,
         "cost_per_kg": 2,
-        "distance": 1
+        "distance": 1,
+        "carbs": 20,
+        "proteins": 14,
+        "lipids": 8,
+        "methane_potential": 10,    
+        
     }
 ]
 
@@ -71,7 +79,10 @@ multiple_solutions: bool = Query(False, description="Whether to return multiple 
     df = pd.DataFrame(data_dict)
     # Set 'name' as the index
     df.set_index('name', inplace=True)
-    
+    # Divide the lipids, proteins, and carbs columns by 100
+    df['lipids'] = df['lipids'] / 100
+    df['proteins'] = df['proteins'] / 100
+    df['carbs'] = df['carbs'] / 100
 
     if multiple_solutions:
         test_target_deviations = [-10, -5, -2, 0, 2, 5, 10]
